@@ -12,9 +12,11 @@ class window.App extends Backbone.Model
 
   gameOver: ->
     if @get('dealerHand').scores()[0] > @get('playerHand').scores()[0]
+      console.log("compare")
       @get('dealerHand').trigger("Won")
       @get('playerHand').trigger("Loss")
     else
+      console.log("compare")
       @get('dealerHand').trigger("Loss")
       @get('playerHand').trigger("Won")
       

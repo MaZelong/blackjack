@@ -8,8 +8,10 @@ class window.HandView extends Backbone.View
       @render()
       @gameStatus()  
     @collection.on 'stand', =>
+      @collection.off 'stand add remove change'
       
     @render()
+    @gameStatus()
 
   render: ->
     @$el.children().detach()

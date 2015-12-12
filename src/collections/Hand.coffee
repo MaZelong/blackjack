@@ -4,17 +4,24 @@ class window.Hand extends Backbone.Collection
   initialize: (array, @deck, @isDealer) ->
     
   hit: ->
-    if @scores()[0] < 21
-      @add(@deck.pop())
-      @last() 
-      
+    if not @isDealer
+      if @scores()[0] < 21
+        @add(@deck.pop())
+        @last() 
+    else
+      if @scores()[0] < 17
+        @add(@deck.pop())
+        @last()
+        @hit()
+      else if @scores()[0] < 22
+        @trigger('gameover')  
+  
   stand: ->
       @trigger("stand")
   play: ->
-    if @scores()[0] < 17
-      @.at(0).flip()
-      @hit()
-    else @trigger('gameover')          
+    @.at(0).flip()
+    @hit()
+    
 
 
 
